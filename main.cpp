@@ -57,27 +57,4 @@ void listarArchivosDeDirectorio(){
     }
 }
 
-int contarArchivosDeDirectorio(){
-    WIN32_FIND_DATA findFileData;
-    HANDLE          hFind;
-    int cantidadDeArchivos=0;
-    hFind = FindFirstFile("C:/Users/enamo/OneDrive/Escritorio/text/*", &findFileData);
 
-    if (hFind == INVALID_HANDLE_VALUE)
-        cout << "Ruta incorrecta";
-    else
-        while (FindNextFile(hFind, &findFileData)!=0){
-            cantidadDeArchivos=cantidadDeArchivos+1;
-        }
-    return cantidadDeArchivos-1;
-}
-
-void mostrarDetalles(){
-    std::filesystem::directory_iterator directoryIterator("C:/Users/enamo/OneDrive/Escritorio/text");
-    for (const auto& entry : directoryIterator) {
-        if (!std::filesystem::is_directory(entry.status())) {
-            std::cout << entry.path().filename() << " "
-                      << file_size(entry.path()) << std::endl;
-        }
-    }
-}
